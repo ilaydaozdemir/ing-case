@@ -3,7 +3,7 @@ import {
   html,
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
-
+import "../components/SubHeaderPage.js";
 export class AddEmployeePage extends LitElement {
   static styles = css`
     div {
@@ -14,7 +14,9 @@ export class AddEmployeePage extends LitElement {
     }
   `;
   render() {
-    return html` <div>AddEmployeePage page</div> `;
+    return html` <sub-header-page>
+      <div>list employees</div>
+    </sub-header-page>`;
   }
 }
 customElements.define("add-page", AddEmployeePage);
