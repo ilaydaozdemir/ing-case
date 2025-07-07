@@ -3,9 +3,16 @@ import {
   html,
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
+import { Router } from "https://cdn.jsdelivr.net/npm/@vaadin/router/+esm";
+
 export class Header extends LitElement {
   static styles = css`
     header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 99%;
+      height: 70px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -30,17 +37,20 @@ export class Header extends LitElement {
       }
     }
   `;
+  navigateTo(path) {
+    Router.go(path);
+  }
   render() {
     return html` <header>
-      <div class="logo">
+      <div class="logo" @click=${() => this.navigateTo("/")}>
         <img src="./logo.png" alt="logo" />
       </div>
       <nav>
-        <span>
+        <span @click=${() => this.navigateTo("/")}>
           <iconify-icon icon="mdi:headset" width="24" height="24"></iconify-icon
           >Employees</span
         >
-        <span>
+        <span @click=${() => this.navigateTo("/add")}>
           <iconify-icon icon="mdi:plus" width="24" height="24"></iconify-icon
           >Add New</span
         >
