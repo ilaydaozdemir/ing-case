@@ -16,7 +16,7 @@ export class TableRow extends LitElement {
       gap: 1rem;
       box-sizing: border-box;
       padding: 12px 16px;
-      border-bottom: 1px solid #ddd;
+      border-top: 1px solid #ddddddaf;
       background-color: #fff;
       align-items: center;
       font-size: 12px;
@@ -29,7 +29,7 @@ export class TableRow extends LitElement {
     }
     .actions iconify-icon {
       cursor: pointer;
-      color: #555;
+      color: #ff6201a9;
     }
     .actions iconify-icon:hover {
       color: #ff6101;
@@ -63,7 +63,6 @@ export class TableRow extends LitElement {
   };
   render() {
     const emp = this.employee || {
-      checkbox: "check",
       firstName: "John",
       lastName: "Doe",
       dateOfEmployment: "1990-01-01",
@@ -75,7 +74,7 @@ export class TableRow extends LitElement {
     };
     return html`
       <div class="row">
-        <div data-label="check">${emp.checkbox}</div>
+        <checkbox-component></checkbox-component>
         <div data-label="First Name">${emp.firstName}</div>
         <div data-label="Last Name">${emp.lastName}</div>
         <div data-label="Date of Employment">${emp.dateOfEmployment}</div>

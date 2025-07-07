@@ -3,7 +3,7 @@ import {
   html,
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
-
+import "./CheckboxComponent.js";
 export class TableHeader extends LitElement {
   static styles = css`
     :host {
@@ -12,15 +12,13 @@ export class TableHeader extends LitElement {
     }
     .header {
       display: grid;
-      box-sizing: border-box;
       grid-template-columns: 12px repeat(9, minmax(120px, 1fr));
       gap: 1rem;
       padding: 12px 16px;
-      background-color: #f0f0f0;
-      border-bottom: 2px solid #ccc;
-      font-weight: bold;
+      background-color: white;
+      font-weight: 400;
       font-size: 12px;
-      color: #333;
+      color: #ff6101;
       position: sticky;
       top: 70px;
       z-index: 1000;
@@ -37,7 +35,7 @@ export class TableHeader extends LitElement {
   render() {
     return html`
       <div class="header">
-        <div></div>
+        <checkbox-component></checkbox-component>
         <div>First Name</div>
         <div>Last Name</div>
         <div>Date of Employment</div>

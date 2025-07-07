@@ -1,0 +1,51 @@
+import {
+  LitElement,
+  html,
+  css,
+} from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
+
+export class CheckboxComponent extends LitElement {
+  static styles = css`
+    label {
+      display: flex;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      accent-color: #ff6101;
+    }
+  `;
+  static properties = {
+    checked: { type: Boolean, reflect: true },
+    label: { type: String },
+  };
+  constructor() {
+    super();
+    this.checked = false;
+    this.label = "";
+  }
+  handleChange(e) {
+    this.checked = e.target.checked;
+    this.dispatchEvent(
+      new CustomEvent("change", {
+        detail: { checked: this.checked },
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
+  render() {
+    return html`
+      <label>
+        <input
+          type="checkbox"
+          .checked=${this.checked}
+          @change=${this.handleChange}
+        />
+        <span>${this.label}</span>
+      </label>
+    `;
+  }
+}
+
+customElements.define("checkbox-component", CheckboxComponent);
