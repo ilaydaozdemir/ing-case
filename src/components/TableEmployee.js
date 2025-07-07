@@ -13,7 +13,6 @@ export class TableEmployee extends LitElement {
     }
     .table {
       min-width: 1200px;
-      margin-top: 80px;
     }
   `;
   static properties = {

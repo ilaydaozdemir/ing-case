@@ -4,7 +4,7 @@ import {
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 
-export class SubHeaderPage extends LitElement {
+export class SubHeaderLayout extends LitElement {
   static styles = css`
     :host {
       display: block;
@@ -67,4 +67,4 @@ export class SubHeaderPage extends LitElement {
     `;
   }
 }
-customElements.define("sub-header-page", SubHeaderPage);
+customElements.define("sub-header-layout", SubHeaderLayout);
