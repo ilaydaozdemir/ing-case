@@ -12,7 +12,6 @@ export class Header extends LitElement {
       top: 0;
       left: 0;
       width: 99%;
-      height: 70px;
       display: flex;
       justify-content: space-between;
       align-items: center;
