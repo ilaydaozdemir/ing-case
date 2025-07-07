@@ -35,7 +35,6 @@ export class SubHeaderPage extends LitElement {
       }
     }
     main {
-      padding: 1rem;
       height: 100%;
       background-color: #f2f2f289;
     }
