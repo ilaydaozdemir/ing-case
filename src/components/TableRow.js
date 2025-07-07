@@ -69,10 +69,11 @@ export class TableRow extends LitElement {
   }
   _onCheckboxChanged(e) {
     const checked = e.detail.checked;
+    const updated = { ...this.employee, checked };
     this.dispatchEvent(
       new CustomEvent("row-checkbox-changed", {
         detail: {
-          employee: { ...this.employee, checked },
+          employee: { updated },
         },
         bubbles: true,
         composed: true,

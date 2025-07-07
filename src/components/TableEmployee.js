@@ -46,7 +46,6 @@ export class TableEmployee extends LitElement {
         checked: false,
       },
     ];
-    this.checkedAll = false;
   }
   render() {
     return html`
@@ -65,11 +64,11 @@ export class TableEmployee extends LitElement {
     `;
   }
   _handleSelectAll(e) {
-    const checked = e.detail.checked;
-    this.checkedAll = checked;
+    const val = e.detail.checked;
+    this.checkedAll = val;
     this.employees = this.employees.map((emp) => ({
       ...emp,
-      checked,
+      checked: val,
     }));
   }
   _handleRowCheckboxChange(e) {
