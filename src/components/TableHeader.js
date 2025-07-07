@@ -5,6 +5,13 @@ import {
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 import "./CheckboxComponent.js";
 export class TableHeader extends LitElement {
+  static properties = {
+    selectAll: { type: Boolean },
+  };
+  constructor() {
+    super();
+    this.selectAll = false;
+  }
   static styles = css`
     :host {
       display: block;
@@ -35,7 +42,10 @@ export class TableHeader extends LitElement {
   render() {
     return html`
       <div class="header">
-        <checkbox-component></checkbox-component>
+        <checkbox-component
+          .checked=${this.selectAll}
+          @checkbox-changed=${this._toggleAll}
+        ></checkbox-component>
         <div>First Name</div>
         <div>Last Name</div>
         <div>Date of Employment</div>
@@ -47,6 +57,16 @@ export class TableHeader extends LitElement {
         <div>Actions</div>
       </div>
     `;
+  }
+  _toggleAll(e) {
+    this.checkedAll = e.detail.checked;
+    this.dispatchEvent(
+      new CustomEvent("select-all", {
+        detail: { checked: this.checkedAll },
+        bubbles: true,
+        composed: true,
+      })
+    );
   }
 }
 customElements.define("table-header", TableHeader);

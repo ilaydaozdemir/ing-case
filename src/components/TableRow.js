@@ -5,6 +5,10 @@ import {
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 
 export class TableRow extends LitElement {
+  static properties = {
+    employee: { type: Object },
+    checked: { type: Boolean },
+  };
   static styles = css`
     :host {
       display: block;
@@ -14,7 +18,6 @@ export class TableRow extends LitElement {
       display: grid;
       grid-template-columns: 12px repeat(9, minmax(120px, 1fr));
       gap: 1rem;
-      box-sizing: border-box;
       padding: 12px 16px;
       border-top: 1px solid #ddddddaf;
       background-color: #fff;
@@ -61,6 +64,29 @@ export class TableRow extends LitElement {
   static properties = {
     employee: { type: Object },
   };
+  constructor() {
+    super();
+    this.employee = {};
+    this.checked = false;
+  }
+  updated(changedProps) {
+    if (changedProps.has("checked")) {
+      this.employee = { ...this.employee, checked: this.checked };
+    }
+  }
+  _onCheckboxChanged(e) {
+    const checked = e.detail.checked;
+    const updatedEmployee = { ...this.employee, checked };
+    this.dispatchEvent(
+      new CustomEvent("row-checkbox-changed", {
+        detail: {
+          employee: updatedEmployee,
+        },
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
   render() {
     const emp = this.employee || {
       firstName: "John",
@@ -71,10 +97,14 @@ export class TableRow extends LitElement {
       email: "john.doe@example.com",
       department: "it",
       position: "Senior",
+      checked: false,
     };
     return html`
       <div class="row">
-        <checkbox-component></checkbox-component>
+        <checkbox-component
+          .checked=${emp.checked}
+          @checkbox-changed=${this._onCheckboxChanged}
+        ></checkbox-component>
         <div data-label="First Name">${emp.firstName}</div>
         <div data-label="Last Name">${emp.lastName}</div>
         <div data-label="Date of Employment">${emp.dateOfEmployment}</div>

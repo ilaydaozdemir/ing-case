@@ -6,6 +6,10 @@ import {
 import "./TableRow.js";
 import "./TableHeader.js";
 export class TableEmployee extends LitElement {
+  static properties = {
+    employees: { type: Array },
+    checkedAll: { type: Boolean },
+  };
   static styles = css`
     .table-wrapper {
       overflow-x: auto;
@@ -15,14 +19,11 @@ export class TableEmployee extends LitElement {
       min-width: 1200px;
     }
   `;
-  static properties = {
-    employees: { type: Array },
-  };
   constructor() {
     super();
+    this.checkedAll = false;
     this.employees = [
       {
-        checkbox: "✔️",
         firstName: "Ayşe",
         lastName: "Yılmaz",
         dateOfEmployment: "2022-03-15",
@@ -31,9 +32,9 @@ export class TableEmployee extends LitElement {
         email: "ayse.yilmaz@example.com",
         department: "Analytics",
         position: "Medior",
+        checked: false,
       },
       {
-        checkbox: "✔️",
         firstName: "Mehmet",
         lastName: "Yılmaz",
         dateOfEmployment: "2022-03-15",
@@ -42,20 +43,46 @@ export class TableEmployee extends LitElement {
         email: "ayse.yilmaz@example.com",
         department: "Analytics",
         position: "Medior",
+        checked: false,
       },
     ];
+    this.checkedAll = false;
   }
   render() {
     return html`
       <div class="table-wrapper">
-        <div class="table">
-          <table-header></table-header>
+        <div
+          class="table"
+          @select-all=${this._handleSelectAll}
+          @row-checkbox-changed=${this._handleRowCheckboxChange}
+        >
+          <table-header .checkedAll=${this.checkedAll}></table-header>
           ${this.employees.map(
-            (emp) => html`<table-row .employee=${emp}></table-row>`
+            (emp) =>
+              html`<table-row
+                .employee=${emp}
+                .checked=${emp.checked}
+              ></table-row>`
           )}
         </div>
       </div>
     `;
+  }
+  _handleSelectAll(e) {
+    const checked = e.detail.checked;
+    this.checkedAll = checked;
+    this.employees = this.employees.map((emp) => ({
+      ...emp,
+      checked: checked,
+    }));
+  }
+  _handleRowCheckboxChange(e) {
+    const updatedEmp = e.detail.employee;
+    this.employees = this.employees.map((emp) =>
+      emp.email === updatedEmp.email ? updatedEmp : emp
+    );
+    const allChecked = this.employees.every((emp) => emp.checked);
+    this.checkedAll = allChecked;
   }
 }
 customElements.define("table-employee", TableEmployee);

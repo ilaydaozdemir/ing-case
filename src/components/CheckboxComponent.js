@@ -17,17 +17,15 @@ export class CheckboxComponent extends LitElement {
   `;
   static properties = {
     checked: { type: Boolean, reflect: true },
-    label: { type: String },
   };
   constructor() {
     super();
     this.checked = false;
-    this.label = "";
   }
   handleChange(e) {
     this.checked = e.target.checked;
     this.dispatchEvent(
-      new CustomEvent("change", {
+      new CustomEvent("checkbox-changed", {
         detail: { checked: this.checked },
         bubbles: true,
         composed: true,
@@ -42,7 +40,6 @@ export class CheckboxComponent extends LitElement {
           .checked=${this.checked}
           @change=${this.handleChange}
         />
-        <span>${this.label}</span>
       </label>
     `;
   }
