@@ -45,6 +45,72 @@ export class TableEmployee extends LitElement {
         position: "Medior",
         checked: false,
       },
+      {
+        firstName: "Selman",
+        lastName: "Yılmaz",
+        dateOfEmployment: "2022-03-15",
+        birthDate: "1994-07-12",
+        phone: "+90 532 111 22 33",
+        email: "ayse.yilmaz@example.com",
+        department: "Analytics",
+        position: "Medior",
+        checked: false,
+      },
+      {
+        firstName: "Lale",
+        lastName: "Yılmaz",
+        dateOfEmployment: "2022-03-15",
+        birthDate: "1994-07-12",
+        phone: "+90 532 111 22 33",
+        email: "ayse.yilmaz@example.com",
+        department: "Analytics",
+        position: "Medior",
+        checked: false,
+      },
+      {
+        firstName: "Namık",
+        lastName: "Yılmaz",
+        dateOfEmployment: "2022-03-15",
+        birthDate: "1994-07-12",
+        phone: "+90 532 111 22 33",
+        email: "ayse.yilmaz@example.com",
+        department: "Analytics",
+        position: "Medior",
+        checked: false,
+      },
+      {
+        firstName: "Huseyin",
+        lastName: "Yılmaz",
+        dateOfEmployment: "2022-03-15",
+        birthDate: "1994-07-12",
+        phone: "+90 532 111 22 33",
+        email: "ayse.yilmaz@example.com",
+        department: "Analytics",
+        position: "Medior",
+        checked: false,
+      },
+      {
+        firstName: "Gamze",
+        lastName: "Yılmaz",
+        dateOfEmployment: "2022-03-15",
+        birthDate: "1994-07-12",
+        phone: "+90 532 111 22 33",
+        email: "ayse.yilmaz@example.com",
+        department: "Analytics",
+        position: "Medior",
+        checked: false,
+      },
+      {
+        firstName: "Ali",
+        lastName: "Yılmaz",
+        dateOfEmployment: "2022-03-15",
+        birthDate: "1994-07-12",
+        phone: "+90 532 111 22 33",
+        email: "ayse.yilmaz@example.com",
+        department: "Analytics",
+        position: "Medior",
+        checked: false,
+      },
     ];
   }
   render() {
@@ -57,24 +123,21 @@ export class TableEmployee extends LitElement {
         >
           <table-header .checkedAll=${this.checkedAll}></table-header>
           ${this.employees.map(
-            (emp) => html`<table-row .employee=${emp}></table-row>`
+            (emp) => html`<table-row .employee=${{ ...emp }}></table-row>`
           )}
         </div>
       </div>
     `;
   }
   _handleSelectAll(e) {
-    const val = e.detail.checked;
-    this.checkedAll = val;
-    this.employees = this.employees.map((emp) => ({
-      ...emp,
-      checked: val,
-    }));
+    const checked = e.detail.checked;
+    this.checkedAll = checked;
+    this.employees = this.employees.map((emp) => ({ ...emp, checked }));
   }
   _handleRowCheckboxChange(e) {
     const updatedEmp = e.detail.employee;
     this.employees = this.employees.map((emp) =>
-      emp.email === updatedEmp.email ? updatedEmp : emp
+      emp.firstName === updatedEmp.firstName ? updatedEmp : emp
     );
     this.checkedAll = this.employees.every((emp) => emp.checked);
   }
