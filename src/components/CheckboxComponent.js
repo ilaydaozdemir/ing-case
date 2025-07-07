@@ -22,7 +22,7 @@ export class CheckboxComponent extends LitElement {
     super();
     this.checked = false;
   }
-  handleChange(e) {
+  _onChange(e) {
     this.checked = e.target.checked;
     this.dispatchEvent(
       new CustomEvent("checkbox-changed", {
@@ -38,7 +38,7 @@ export class CheckboxComponent extends LitElement {
         <input
           type="checkbox"
           .checked=${this.checked}
-          @change=${this.handleChange}
+          @change=${this._onChange}
         />
       </label>
     `;

@@ -58,11 +58,7 @@ export class TableEmployee extends LitElement {
         >
           <table-header .checkedAll=${this.checkedAll}></table-header>
           ${this.employees.map(
-            (emp) =>
-              html`<table-row
-                .employee=${emp}
-                .checked=${emp.checked}
-              ></table-row>`
+            (emp) => html`<table-row .employee=${emp}></table-row>`
           )}
         </div>
       </div>
@@ -73,7 +69,7 @@ export class TableEmployee extends LitElement {
     this.checkedAll = checked;
     this.employees = this.employees.map((emp) => ({
       ...emp,
-      checked: checked,
+      checked,
     }));
   }
   _handleRowCheckboxChange(e) {
@@ -81,8 +77,7 @@ export class TableEmployee extends LitElement {
     this.employees = this.employees.map((emp) =>
       emp.email === updatedEmp.email ? updatedEmp : emp
     );
-    const allChecked = this.employees.every((emp) => emp.checked);
-    this.checkedAll = allChecked;
+    this.checkedAll = this.employees.every((emp) => emp.checked);
   }
 }
 customElements.define("table-employee", TableEmployee);

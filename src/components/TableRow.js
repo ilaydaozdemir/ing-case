@@ -7,7 +7,6 @@ import {
 export class TableRow extends LitElement {
   static properties = {
     employee: { type: Object },
-    checked: { type: Boolean },
   };
   static styles = css`
     :host {
@@ -67,20 +66,13 @@ export class TableRow extends LitElement {
   constructor() {
     super();
     this.employee = {};
-    this.checked = false;
-  }
-  updated(changedProps) {
-    if (changedProps.has("checked")) {
-      this.employee = { ...this.employee, checked: this.checked };
-    }
   }
   _onCheckboxChanged(e) {
     const checked = e.detail.checked;
-    const updatedEmployee = { ...this.employee, checked };
     this.dispatchEvent(
       new CustomEvent("row-checkbox-changed", {
         detail: {
-          employee: updatedEmployee,
+          employee: { ...this.employee, checked },
         },
         bubbles: true,
         composed: true,

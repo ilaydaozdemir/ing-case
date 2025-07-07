@@ -6,11 +6,22 @@ import {
 import "./CheckboxComponent.js";
 export class TableHeader extends LitElement {
   static properties = {
-    selectAll: { type: Boolean },
+    checkedAll: { type: Boolean },
   };
   constructor() {
     super();
     this.selectAll = false;
+  }
+  _toggleAll(e) {
+    const checked = e.detail.checked;
+    this.checkedAll = checked;
+    this.dispatchEvent(
+      new CustomEvent("select-all", {
+        detail: { checked },
+        bubbles: true,
+        composed: true,
+      })
+    );
   }
   static styles = css`
     :host {
@@ -43,7 +54,7 @@ export class TableHeader extends LitElement {
     return html`
       <div class="header">
         <checkbox-component
-          .checked=${this.selectAll}
+          .checked=${this.checkedAll}
           @checkbox-changed=${this._toggleAll}
         ></checkbox-component>
         <div>First Name</div>
@@ -57,16 +68,6 @@ export class TableHeader extends LitElement {
         <div>Actions</div>
       </div>
     `;
-  }
-  _toggleAll(e) {
-    this.checkedAll = e.detail.checked;
-    this.dispatchEvent(
-      new CustomEvent("select-all", {
-        detail: { checked: this.checkedAll },
-        bubbles: true,
-        composed: true,
-      })
-    );
   }
 }
 customElements.define("table-header", TableHeader);
