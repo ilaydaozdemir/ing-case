@@ -12,7 +12,8 @@
   "description": "",
   "dependencies": {
     "@vaadin/router": "^2.0.0",
-    "lit": "^3.3.0"
+    "lit": "^3.3.0",
+    "redux": "^5.0.1"
   },
   "devDependencies": {
     "lite-server": "^2.6.1"
