@@ -15,7 +15,17 @@ export class TableRow extends LitElement {
     }
     .row {
       display: grid;
-      grid-template-columns: 12px repeat(9, minmax(120px, 1fr));
+      grid-template-columns:
+        12px
+        100px
+        100px
+        140px
+        140px
+        160px
+        260px
+        120px
+        120px
+        80px;
       gap: 1rem;
       padding: 12px 16px;
       border-top: 1px solid #ddddddaf;
@@ -35,29 +45,6 @@ export class TableRow extends LitElement {
     }
     .actions iconify-icon:hover {
       color: #ff6101;
-    }
-    //mobile
-    @media (max-width: 768px) {
-      .row {
-        gap: 0.5rem;
-        grid-template-columns: repeat(10, minmax(100px, 1fr));
-        grid-row-gap: 8px;
-        font-size: 12px;
-        padding: 10px;
-      }
-      .row > div {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .row > div::before {
-        content: attr(data-label);
-        font-weight: bold;
-        color: #888;
-      }
-      .actions {
-        justify-content: flex-end;
-      }
     }
   `;
   static properties = {
@@ -87,7 +74,7 @@ export class TableRow extends LitElement {
       dateOfEmployment: "1990-01-01",
       birthDate: "1990-01-01",
       phone: "+90 555 555 55 55",
-      email: "john.doe@example.com",
+      email: "john.doe@gmail.com",
       department: "it",
       position: "Senior",
       checked: false,

@@ -30,7 +30,17 @@ export class TableHeader extends LitElement {
     }
     .header {
       display: grid;
-      grid-template-columns: 12px repeat(9, minmax(120px, 1fr));
+      grid-template-columns:
+        12px
+        100px
+        100px
+        140px
+        140px
+        160px
+        260px
+        120px
+        120px
+        80px;
       gap: 1rem;
       padding: 12px 16px;
       background-color: white;
@@ -40,14 +50,6 @@ export class TableHeader extends LitElement {
       position: sticky;
       top: 70px;
       z-index: 1000;
-    }
-    @media (max-width: 768px) {
-      .header {
-        font-size: 12px;
-        padding: 10px;
-        gap: 0.5rem;
-        grid-template-columns: repeat(10, minmax(100px, 1fr));
-      }
     }
   `;
   render() {

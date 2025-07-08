@@ -16,7 +16,8 @@ export class TableEmployee extends LitElement {
       width: 100%;
     }
     .table {
-      min-width: 1200px;
+      min-width: 1400px;
+      width: max-content;
     }
   `;
   constructor() {
@@ -29,7 +30,7 @@ export class TableEmployee extends LitElement {
         dateOfEmployment: "2022-03-15",
         birthDate: "1994-07-12",
         phone: "+90 532 111 22 33",
-        email: "ayse.yilmaz@example.com",
+        email: "ayse.yilmaz@gmail.com",
         department: "Analytics",
         position: "Medior",
         checked: false,
@@ -40,7 +41,7 @@ export class TableEmployee extends LitElement {
         dateOfEmployment: "2022-03-15",
         birthDate: "1994-07-12",
         phone: "+90 532 111 22 33",
-        email: "ayse.yilmaz@example.com",
+        email: "ayse.yilmaz@gmail.com",
         department: "Analytics",
         position: "Medior",
         checked: false,
@@ -51,7 +52,7 @@ export class TableEmployee extends LitElement {
         dateOfEmployment: "2022-03-15",
         birthDate: "1994-07-12",
         phone: "+90 532 111 22 33",
-        email: "ayse.yilmaz@example.com",
+        email: "ayse.yilmaz@gmail.com",
         department: "Analytics",
         position: "Medior",
         checked: false,
@@ -62,7 +63,7 @@ export class TableEmployee extends LitElement {
         dateOfEmployment: "2022-03-15",
         birthDate: "1994-07-12",
         phone: "+90 532 111 22 33",
-        email: "ayse.yilmaz@example.com",
+        email: "ayse.yilmaz@gmail.com",
         department: "Analytics",
         position: "Medior",
         checked: false,
@@ -73,7 +74,7 @@ export class TableEmployee extends LitElement {
         dateOfEmployment: "2022-03-15",
         birthDate: "1994-07-12",
         phone: "+90 532 111 22 33",
-        email: "ayse.yilmaz@example.com",
+        email: "ayse.yilmaz@gmail.com",
         department: "Analytics",
         position: "Medior",
         checked: false,
@@ -84,7 +85,7 @@ export class TableEmployee extends LitElement {
         dateOfEmployment: "2022-03-15",
         birthDate: "1994-07-12",
         phone: "+90 532 111 22 33",
-        email: "ayse.yilmaz@example.com",
+        email: "ayse.yilmaz@gmail.com",
         department: "Analytics",
         position: "Medior",
         checked: false,
@@ -95,7 +96,7 @@ export class TableEmployee extends LitElement {
         dateOfEmployment: "2022-03-15",
         birthDate: "1994-07-12",
         phone: "+90 532 111 22 33",
-        email: "ayse.yilmaz@example.com",
+        email: "ayse.yilmaz@gmail.com",
         department: "Analytics",
         position: "Medior",
         checked: false,
@@ -106,7 +107,7 @@ export class TableEmployee extends LitElement {
         dateOfEmployment: "2022-03-15",
         birthDate: "1994-07-12",
         phone: "+90 532 111 22 33",
-        email: "ayse.yilmaz@example.com",
+        email: "ayse.yilmaz@gmail.com",
         department: "Analytics",
         position: "Medior",
         checked: false,
