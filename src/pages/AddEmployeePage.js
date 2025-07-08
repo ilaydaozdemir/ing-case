@@ -4,18 +4,12 @@ import {
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 import "../components/SubHeaderLayout.js";
+import "../components/EmployeeArea.js";
 export class AddEmployeePage extends LitElement {
-  static styles = css`
-    div {
-      padding-top: 80px;
-      color: red;
-      background-color: gray;
-      margin-top: 60px;
-    }
-  `;
+  static styles = css``;
   render() {
     return html` <sub-header-layout>
-      <div>list employees</div>
+      <employee-area></employee-area>
     </sub-header-layout>`;
   }
 }
