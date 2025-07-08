@@ -5,6 +5,7 @@ import {
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 import "./TableRow.js";
 import "./TableHeader.js";
+import "./TableFooter.js";
 export class TableEmployee extends LitElement {
   static properties = {
     employees: { type: Array },
@@ -115,6 +116,9 @@ export class TableEmployee extends LitElement {
     ];
   }
   render() {
+    const start = (this.currentPage - 1) * 10;
+    const end = this.currentPage * 10;
+    const paginatedEmployees = this.employees.slice(start, end);
     return html`
       <div class="table-wrapper">
         <div
@@ -126,6 +130,11 @@ export class TableEmployee extends LitElement {
           ${this.employees.map(
             (emp) => html`<table-row .employee=${{ ...emp }}></table-row>`
           )}
+          <table-footer
+            .currentPage=${this.currentPage}
+            .totalPages=${Math.ceil(this.employees.length / 10)}
+            @page-change=${this._onPageChange}
+          ></table-footer>
         </div>
       </div>
     `;
