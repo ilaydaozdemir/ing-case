@@ -3,7 +3,7 @@ import {
   html,
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
-import "./CheckboxComponent.js";
+import "../CheckboxComponent.js";
 export class TableHeader extends LitElement {
   static properties = {
     checkedAll: { type: Boolean },

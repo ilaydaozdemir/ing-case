@@ -26,7 +26,7 @@ export class SubHeaderLayout extends LitElement {
       .icons {
         margin-top: 2rem;
         span {
-          color: #ff6201b2;
+          color: #ff6201a9;
           cursor: pointer;
           &:hover {
             color: #ff6101;
