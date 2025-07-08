@@ -51,6 +51,9 @@ export class TableFooter extends LitElement {
       background-color: #ff6101;
       color: white;
       font-weight: bold;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
     }
     .dots {
       padding: 6px 10px;

@@ -5,6 +5,9 @@ import {
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 
 export class SubHeaderLayout extends LitElement {
+  static properties = {
+    viewType: { type: String },
+  };
   static styles = css`
     :host {
       display: block;
@@ -39,12 +42,26 @@ export class SubHeaderLayout extends LitElement {
       background-color: #f2f2f289;
     }
   `;
+  constructor() {
+    super();
+    this.viewType = "table";
+  }
+  _changeView(view) {
+    this.viewType = view;
+    this.dispatchEvent(
+      new CustomEvent("view-change", {
+        detail: { view },
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
   render() {
     return html`
       <header>
         <span class="title">Employee List</span>
         <div class="icons">
-          <span>
+          <span @click=${() => this._changeView("table")}>
             <iconify-icon
               icon="mdi:view-headline"
               width="24"
@@ -52,7 +69,7 @@ export class SubHeaderLayout extends LitElement {
             ></iconify-icon
           ></span>
 
-          <span>
+          <span @click=${() => this._changeView("list")}>
             <iconify-icon
               icon="mdi:view-grid-outline"
               width="24"
