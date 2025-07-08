@@ -5,6 +5,15 @@ import {
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 
 export class EmployeeArea extends LitElement {
+  static properties = {
+    formData: { type: Object },
+    errors: { type: Object },
+  };
+  constructor() {
+    super();
+    this.formData = {};
+    this.errors = {};
+  }
   static styles = css`
     .employee-area {
       background-color: white;
@@ -92,61 +101,113 @@ export class EmployeeArea extends LitElement {
         margin-right: 0;
       }
     }
+    .error {
+      color: #d32f2f;
+      background-color: #fdecea;
+      border-left: 4px solid #d32f2f;
+      padding: 0.3rem 0.5rem;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+      font-weight: 600;
+      font-family: Arial, sans-serif;
+    }
   `;
 
+  handleInput(key, e) {
+    this.dispatchEvent(
+      new CustomEvent("input-change", {
+        detail: { key, value: e.target.value },
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
+  handleSubmit() {
+    this.dispatchEvent(
+      new CustomEvent("submit-click", { bubbles: true, composed: true })
+    );
+  }
+  handleCancel() {
+    this.dispatchEvent(
+      new CustomEvent("cancel-click", { bubbles: true, composed: true })
+    );
+  }
+  renderInput(label, key, type = "text") {
+    return html`
+      <div class="sub-area">
+        <span class="title">${label}</span>
+        <div class="input">
+          <input
+            type=${type}
+            .value=${this.formData[key] || ""}
+            @input=${(e) => this.handleInput(key, e)}
+          />
+          ${this.errors[key]
+            ? html`<div class="error">${this.errors[key]}</div>`
+            : ""}
+        </div>
+      </div>
+    `;
+  }
+  renderSelect(label, key, options = []) {
+    return html`
+      <div class="sub-area">
+        <span class="title">${label}</span>
+        <div class="input">
+          <select
+            .value=${this.formData[key] || ""}
+            @change=${(e) => this.handleInput(key, e)}
+          >
+            <option value="">Select...</option>
+            ${options.map((opt) => html`<option value=${opt}>${opt}</option>`)}
+          </select>
+          ${this.errors[key]
+            ? html`<div class="error">${this.errors[key]}</div>`
+            : ""}
+        </div>
+      </div>
+    `;
+  }
   render() {
     return html`
       <div class="employee-area">
         <div class="employee-wrapper">
           <div class="area-1">
             <div class="sub-area">
-              <span class="title"> First Name </span>
-              <div class="input"><input type="text" /></div>
-            </div>
-            <div class="sub-area">
-              <span class="title"> Date of Birth </span>
-              <div class="input"><input type="date" /></div>
-            </div>
-            <div class="sub-area">
-              <span class="title"> Department </span>
-              <div class="input"><input type="text" /></div>
+              ${this.renderInput("First Name", "firstName")}
+              ${this.renderInput("Date of Birth", "dob", "date")}
+              ${this.renderSelect("Department", "department", [
+                "Analytics",
+                "Tech",
+              ])}
             </div>
           </div>
           <div class="area-2">
             <div class="sub-area">
-              <span class="title"> Last Name </span>
-              <div class="input"><input type="text" /></div>
-            </div>
-            <div class="sub-area">
-              <span class="title"> Phone </span>
-              <div class="input"><input type="tel" /></div>
-            </div>
-            <div class="sub-area">
-              <span class="title"> Position </span>
-              <div class="input">
-                <select id="position" name="position">
-                  <option value="">Select...</option>
-                  <option value="analytics">Analytics</option>
-                  <option value="development">Development</option>
-                  <option value="hr">Human Resources</option>
-                </select>
-              </div>
+              ${this.renderInput("Last Name", "lastName")}
+              ${this.renderInput("Phone", "phone", "tel")}
+              ${this.renderSelect("Position", "position", [
+                "Junior",
+                "Medior",
+                "Senior",
+              ])}
             </div>
           </div>
           <div class="area-3">
             <div class="sub-area">
-              <span class="title"> Date of Employment</span>
-              <div class="input"><input type="date" /></div>
-            </div>
-            <div class="sub-area">
-              <span class="title"> Email </span>
-              <div class="input"><input type="email" /></div>
+              ${this.renderInput(
+                "Date of Employment",
+                "employmentDate",
+                "date"
+              )}
+              ${this.renderInput("Email", "email", "email")}
             </div>
           </div>
         </div>
         <div class="button-area">
-          <button class="save">Save</button>
-          <button class="cancel">Cancel</button>
+          <button class="save" @click=${this.handleSubmit}>Save</button>
+          <button class="cancel" @click=${this.handleCancel}>Cancel</button>
         </div>
       </div>
     `;
