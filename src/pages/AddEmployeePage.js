@@ -5,6 +5,8 @@ import {
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 import "../components/SubHeaderLayout.js";
 import "../components/EmployeeArea.js";
+import { store, addEmployee } from "../store/store.js";
+
 export class AddEmployeePage extends LitElement {
   static properties = {
     formData: { type: Object },
@@ -67,12 +69,10 @@ export class AddEmployeePage extends LitElement {
   }
   handleSubmit() {
     if (this.validate()) {
-      const existing = JSON.parse(localStorage.getItem("employees") || "[]");
-      existing.push(this.formData);
-      localStorage.setItem("employees", JSON.stringify(existing));
+      store.dispatch(addEmployee(this.formData));
       window.location.href = "/";
     } else {
-      console.warn("❌ Form validation failed", this.errors);
+      console.warn("Form validation failed", this.errors);
     }
   }
   handleCancel() {

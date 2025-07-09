@@ -87,8 +87,8 @@ export class TableRow extends LitElement {
         ></checkbox-component>
         <div data-label="First Name">${emp.firstName}</div>
         <div data-label="Last Name">${emp.lastName}</div>
-        <div data-label="Date of Employment">${emp.dateOfEmployment}</div>
-        <div data-label="Date of Birth">${emp.birthDate}</div>
+        <div data-label="Date of Employment">${emp.employmentDate}</div>
+        <div data-label="Date of Birth">${emp.dob}</div>
         <div data-label="Phone">${emp.phone}</div>
         <div data-label="Email">${emp.email}</div>
         <div data-label="Department">${emp.department}</div>
