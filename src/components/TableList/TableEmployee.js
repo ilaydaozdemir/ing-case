@@ -7,10 +7,14 @@ import "./TableRow.js";
 import "./TableHeader.js";
 import "./TableFooter.js";
 import { store } from "../../store/store.js";
+import "../Modal.js";
+import { deleteEmployee } from "../../store/store.js";
 export class TableEmployee extends LitElement {
   static properties = {
     employees: { type: Array },
     checkedAll: { type: Boolean },
+    modalOpen: { type: Boolean },
+    selectedEmail: { type: String },
   };
   static styles = css`
     .table-wrapper {
@@ -31,7 +35,22 @@ export class TableEmployee extends LitElement {
       this.employees = store.getState().employees;
       this.requestUpdate();
     });
+    this.modalOpen = false;
+    this.selectedEmail = "";
   }
+  _handleOpenDeleteModal(e) {
+    this.selectedEmail = e.detail.email;
+    this.modalOpen = true;
+  }
+  _handleConfirmDelete(e) {
+    const email = e.detail.email;
+    store.dispatch(deleteEmployee(email));
+    this.modalOpen = false;
+  }
+  _handleCancelDelete() {
+    this.modalOpen = false;
+  }
+
   render() {
     const start = (this.currentPage - 1) * 10;
     const end = this.currentPage * 10;
@@ -42,6 +61,7 @@ export class TableEmployee extends LitElement {
           class="table"
           @select-all=${this._handleSelectAll}
           @row-checkbox-changed=${this._handleRowCheckboxChange}
+          @request-delete=${this._handleOpenDeleteModal}
         >
           <table-header .checkedAll=${this.checkedAll}></table-header>
           ${paginatedEmployees.map(
@@ -53,6 +73,12 @@ export class TableEmployee extends LitElement {
             @page-change=${this._onPageChange}
           ></table-footer>
         </div>
+        <delete-modal
+          .open=${this.modalOpen}
+          .employeeEmail=${this.selectedEmail}
+          @confirm-delete=${this._handleConfirmDelete}
+          @cancel-delete=${this._handleCancelDelete}
+        ></delete-modal>
       </div>
     `;
   }

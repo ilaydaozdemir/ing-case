@@ -3,7 +3,7 @@ import {
   html,
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
-
+import { store, deleteEmployee } from "../../store/store.js";
 export class TableRow extends LitElement {
   static properties = {
     employee: { type: Object },
@@ -67,6 +67,16 @@ export class TableRow extends LitElement {
       })
     );
   }
+  _onDelete() {
+    this.dispatchEvent(
+      new CustomEvent("request-delete", {
+        detail: { email: this.employee.email },
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
+
   render() {
     const emp = this.employee || {
       firstName: "John",
@@ -95,7 +105,12 @@ export class TableRow extends LitElement {
         <div data-label="Position">${emp.position}</div>
         <div class="actions" data-label="Actions">
           <iconify-icon icon="mdi:pencil" width="20" height="20"></iconify-icon>
-          <iconify-icon icon="mdi:delete" width="20" height="20"></iconify-icon>
+          <iconify-icon
+            icon="mdi:delete"
+            width="20"
+            height="20"
+            @click=${this._onDelete}
+          ></iconify-icon>
         </div>
       </div>
     `;
