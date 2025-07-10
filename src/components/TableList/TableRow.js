@@ -3,6 +3,7 @@ import {
   html,
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
+import { Router } from "https://cdn.jsdelivr.net/npm/@vaadin/router/+esm";
 import { store, deleteEmployee } from "../../store/store.js";
 export class TableRow extends LitElement {
   static properties = {
@@ -76,7 +77,9 @@ export class TableRow extends LitElement {
       })
     );
   }
-
+  _onEdit() {
+    Router.go(`/edit/${this.employee.email}`);
+  }
   render() {
     const emp = this.employee || {
       firstName: "John",
@@ -104,7 +107,12 @@ export class TableRow extends LitElement {
         <div data-label="Department">${emp.department}</div>
         <div data-label="Position">${emp.position}</div>
         <div class="actions" data-label="Actions">
-          <iconify-icon icon="mdi:pencil" width="20" height="20"></iconify-icon>
+          <iconify-icon
+            icon="mdi:pencil"
+            width="20"
+            height="20"
+            @click=${this._onEdit}
+          ></iconify-icon>
           <iconify-icon
             icon="mdi:delete"
             width="20"
