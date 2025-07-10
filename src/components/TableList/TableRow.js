@@ -4,11 +4,7 @@ import {
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 import { Router } from "https://cdn.jsdelivr.net/npm/@vaadin/router/+esm";
-import { store, deleteEmployee } from "../../store/store.js";
 export class TableRow extends LitElement {
-  static properties = {
-    employee: { type: Object },
-  };
   static styles = css`
     :host {
       display: block;
@@ -68,6 +64,11 @@ export class TableRow extends LitElement {
       })
     );
   }
+  updated(changedProps) {
+    if (changedProps.has("employee")) {
+      this.requestUpdate();
+    }
+  }
   _onDelete() {
     this.dispatchEvent(
       new CustomEvent("request-delete", {
@@ -81,31 +82,21 @@ export class TableRow extends LitElement {
     Router.go(`/edit/${this.employee.email}`);
   }
   render() {
-    const emp = this.employee || {
-      firstName: "John",
-      lastName: "Doe",
-      dateOfEmployment: "1990-01-01",
-      birthDate: "1990-01-01",
-      phone: "+90 555 555 55 55",
-      email: "john.doe@gmail.com",
-      department: "it",
-      position: "Senior",
-      checked: false,
-    };
+    const emp = this.employee || {};
     return html`
       <div class="row">
         <checkbox-component
           .checked=${this.employee.checked}
           @checkbox-changed=${this._onCheckboxChanged}
         ></checkbox-component>
-        <div data-label="First Name">${emp.firstName}</div>
-        <div data-label="Last Name">${emp.lastName}</div>
-        <div data-label="Date of Employment">${emp.employmentDate}</div>
-        <div data-label="Date of Birth">${emp.dob}</div>
-        <div data-label="Phone">${emp.phone}</div>
-        <div data-label="Email">${emp.email}</div>
-        <div data-label="Department">${emp.department}</div>
-        <div data-label="Position">${emp.position}</div>
+        <div data-label="First Name">${emp.firstName || ""}</div>
+        <div data-label="Last Name">${emp.lastName || ""}</div>
+        <div data-label="Date of Employment">${emp.employmentDate || ""}</div>
+        <div data-label="Date of Birth">${emp.dob || ""}</div>
+        <div data-label="Phone">${emp.phone || ""}</div>
+        <div data-label="Email">${emp.email || ""}</div>
+        <div data-label="Department">${emp.department || ""}</div>
+        <div data-label="Position">${emp.position || ""}</div>
         <div class="actions" data-label="Actions">
           <iconify-icon
             icon="mdi:pencil"

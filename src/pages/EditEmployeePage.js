@@ -6,7 +6,7 @@ import {
 import "../components/SubHeaderLayout.js";
 import { Router } from "https://cdn.jsdelivr.net/npm/@vaadin/router/+esm";
 import "../components/EmployeeArea.js";
-import { store } from "../store/store.js";
+import { store, updateEmployee } from "../store/store.js";
 export class EditEmployeePage extends LitElement {
   static properties = {
     formData: { type: Object },
@@ -21,6 +21,10 @@ export class EditEmployeePage extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     const path = window.location.pathname;
+    this.unsubscribe = store.subscribe(() => {
+      this.employees = [...store.getState().employees];
+      this.requestUpdate();
+    });
     const parts = path.split("/");
     const email = decodeURIComponent(parts[2]);
     console.log("EDITING EMAIL:", email);
@@ -42,13 +46,12 @@ export class EditEmployeePage extends LitElement {
     const { key, value } = e.detail;
     this.formData = { ...this.formData, [key]: value };
   }
+
   handleSubmit() {
-    store.dispatch({
-      type: "UPDATE_EMPLOYEE",
-      payload: this.formData,
-    });
+    store.dispatch(updateEmployee(this.formData));
     Router.go("/");
   }
+
   handleCancel() {
     Router.go("/edit/:email");
   }

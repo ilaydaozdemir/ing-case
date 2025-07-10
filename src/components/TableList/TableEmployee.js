@@ -32,7 +32,7 @@ export class TableEmployee extends LitElement {
     this.employees = store.getState().employees;
     this.currentPage = 1;
     store.subscribe(() => {
-      this.employees = store.getState().employees;
+      this.employees = [...store.getState().employees];
       this.requestUpdate();
     });
     this.modalOpen = false;

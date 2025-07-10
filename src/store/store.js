@@ -25,11 +25,13 @@ const reducer = (state = initialState, action) => {
         employees: filteredEmployees,
       };
     case "UPDATE_EMPLOYEE":
+      const updatedList = state.employees.map((emp) =>
+        emp.email === action.payload.email ? action.payload : emp
+      );
+      localStorage.setItem("employees", JSON.stringify(updatedList));
       return {
         ...state,
-        employees: state.employees.map((emp) =>
-          emp.email === action.payload.email ? action.payload : emp
-        ),
+        employees: updatedList,
       };
 
     default:
@@ -44,4 +46,8 @@ export const addEmployee = (employee) => ({
 export const deleteEmployee = (email) => ({
   type: DELETE_EMPLOYEE,
   payload: email,
+});
+export const updateEmployee = (employee) => ({
+  type: "UPDATE_EMPLOYEE",
+  payload: employee,
 });
