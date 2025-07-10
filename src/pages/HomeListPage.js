@@ -5,7 +5,7 @@ import {
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 import "../components/TableList/TableEmployee.js";
 import "../components/SubHeaderLayout.js";
-import "../components/Card.js";
+import "../components/CardList.js";
 export class HomeListPage extends LitElement {
   static properties = {
     viewType: { type: String },
@@ -30,7 +30,7 @@ export class HomeListPage extends LitElement {
               style="display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem"
             >
               ${Array.from({ length: 1 }).map(
-                () => html`<card-list></card-list>`
+                () => html`<card-container></card-container>`
               )}
             </div>`}
       </sub-header-layout>
