@@ -123,6 +123,16 @@ export class EmployeeArea extends LitElement {
       })
     );
   }
+  _handleChange(e) {
+    const { name, value } = e.target;
+    this.dispatchEvent(
+      new CustomEvent("input-change", {
+        detail: { key: name, value },
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
   handleSubmit() {
     this.dispatchEvent(
       new CustomEvent("submit-click", { bubbles: true, composed: true })
@@ -156,11 +166,20 @@ export class EmployeeArea extends LitElement {
         <span class="title">${label}</span>
         <div class="input">
           <select
+            name=${key}
             .value=${this.formData[key] || ""}
-            @change=${(e) => this.handleInput(key, e)}
+            @change=${this._handleChange}
           >
             <option value="">Select...</option>
-            ${options.map((opt) => html`<option value=${opt}>${opt}</option>`)}
+            ${options.map(
+              (opt) =>
+                html`<option
+                  value=${opt}
+                  ?selected=${this.formData[key] === opt}
+                >
+                  ${opt}
+                </option>`
+            )}
           </select>
           ${this.errors[key]
             ? html`<div class="error">${this.errors[key]}</div>`
@@ -169,6 +188,7 @@ export class EmployeeArea extends LitElement {
       </div>
     `;
   }
+
   render() {
     return html`
       <div class="employee-area">

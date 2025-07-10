@@ -24,6 +24,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         employees: filteredEmployees,
       };
+    case "UPDATE_EMPLOYEE":
+      return {
+        ...state,
+        employees: state.employees.map((emp) =>
+          emp.email === action.payload.email ? action.payload : emp
+        ),
+      };
 
     default:
       return state;
