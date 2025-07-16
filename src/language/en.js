@@ -26,4 +26,8 @@ export default {
   "modal.desc1": "Selected Employee record of ",
   "modal.desc2": "times will be deleted ",
   "modal.button": "Porceed",
+  "button.edit": "Edit",
+  "button.delete": "Delete",
+  "title.employee": "Employees",
+  "title.add": "Add New",
 };

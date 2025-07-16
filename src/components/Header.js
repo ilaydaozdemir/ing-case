@@ -4,6 +4,7 @@ import {
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 import { Router } from "https://cdn.jsdelivr.net/npm/@vaadin/router/+esm";
+import { t } from "../i18n.js";
 export class Header extends LitElement {
   static properties = {
     language: { type: String },
@@ -81,11 +82,11 @@ export class Header extends LitElement {
               width="24"
               height="24"
             ></iconify-icon
-            >Employees
+            >${t("title.employee", this.language)}
           </span>
           <span @click=${() => this.navigateTo("/add")}>
             <iconify-icon icon="mdi:plus" width="24" height="24"></iconify-icon
-            >Add New
+            >${t("title.add", this.language)}
           </span>
           <span @click=${this.toggleLanguage}>
             <iconify-icon

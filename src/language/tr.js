@@ -26,4 +26,8 @@ export default {
   "modal.desc1": "Seçilen Çalışan ",
   "modal.desc2": "kayıtlarının zamanları silinecek ",
   "modal.button": "Uygula",
+  "button.edit": "Düzenle",
+  "button.delete": "Sil",
+  "title.employee": "Çalışanlar",
+  "title.add": "Yeni Ekle",
 };

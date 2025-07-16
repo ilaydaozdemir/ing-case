@@ -5,9 +5,11 @@ import {
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 import "./TableList/TableFooter.js";
 import { Router } from "https://cdn.jsdelivr.net/npm/@vaadin/router/+esm";
+import { t } from "../i18n.js";
 export class Card extends LitElement {
   static properties = {
     employee: { type: Object },
+    language: { type: String },
   };
   static styles = css`
     .card-wrapper {
@@ -76,29 +78,45 @@ export class Card extends LitElement {
       })
     );
   }
+  constructor() {
+    super();
+    this.language = localStorage.getItem("lang") || "en";
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener("language-changed", this._onLanguageChanged);
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener("language-changed", this._onLanguageChanged);
+  }
+  _onLanguageChanged = (e) => {
+    this.language = e.detail;
+    this.requestUpdate();
+  };
   render() {
     const e = this.employee || {};
     return html`
       <div class="card-wrapper">
         <div class="card">
           <div>
-            <div class="text">First Name:</div>
+            <div class="text">${t("form.name", this.language)}</div>
             <div class="information">${e.firstName}</div>
-            <div class="text">First Date of Employment</div>
+            <div class="text">${t("form.doe", this.language)}</div>
             <div class="information">${e.employmentDate}</div>
-            <div class="text">Phone</div>
+            <div class="text">${t("form.phone", this.language)}</div>
             <div class="information">${e.phone}</div>
-            <div class="text">Department</div>
+            <div class="text">${t("form.department", this.language)}</div>
             <div class="information">${e.department}</div>
           </div>
           <div>
-            <div class="text">Last Name</div>
+            <div class="text">${t("form.surname", this.language)}</div>
             <div class="information">${e.lastName}</div>
-            <div class="text">Date of Birth</div>
+            <div class="text">${t("form.birthday", this.language)}</div>
             <div class="information">${e.dob}</div>
             <div class="text">Email</div>
             <div class="information">${e.email}</div>
-            <div class="text">Position</div>
+            <div class="text">${t("form.position", this.language)}</div>
             <div class="information">${e.position}</div>
           </div>
         </div>
@@ -110,7 +128,7 @@ export class Card extends LitElement {
                 width="16"
                 height="16"
               ></iconify-icon> </span
-            >Edit
+            >${t("button.edit", this.language)}
           </button>
           <button class="delete" @click=${this._onDelete}>
             <span
@@ -119,7 +137,7 @@ export class Card extends LitElement {
                 width="16"
                 height="16"
               ></iconify-icon> </span
-            >Delete
+            >${t("button.delete", this.language)}
           </button>
         </div>
       </div>
