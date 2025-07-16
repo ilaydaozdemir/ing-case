@@ -54,7 +54,17 @@ export class SubHeaderLayout extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this._checkPathVisibility();
+    const path = window.location.pathname;
+    this.pageTitle = this._getTitleFromPath(path);
   }
+  _getTitleFromPath(path) {
+    if (path === "/") return "Employee List";
+    if (path === "/cards") return "Employee Cards";
+    if (path.startsWith("/edit")) return "Edit Employee";
+    if (path === "/add") return "Add New Employee";
+    return "ING CASE";
+  }
+
   _checkPathVisibility() {
     const path = window.location.pathname.toLowerCase();
     this.iconsVisible = !(path.includes("add") || path.includes("edit"));
@@ -72,7 +82,7 @@ export class SubHeaderLayout extends LitElement {
   render() {
     return html`
       <header>
-        <span class="title">Employee List</span>
+        <span class="title">${this.pageTitle}</span>
         ${this.iconsVisible
           ? html`
               <div class="icons">
