@@ -3,11 +3,12 @@ import {
   html,
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
-
+import { t } from "../i18n.js";
 export class SubHeaderLayout extends LitElement {
   static properties = {
     viewType: { type: String },
     iconsVisible: { type: Boolean },
+    language: { type: String },
   };
   static styles = css`
     :host {
@@ -50,7 +51,20 @@ export class SubHeaderLayout extends LitElement {
     super();
     this.viewType = "table";
     this.iconsVisible = true;
+    this.language = localStorage.getItem("lang") || "en";
   }
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener("language-changed", this._onLanguageChanged);
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener("language-changed", this._onLanguageChanged);
+  }
+  _onLanguageChanged = (e) => {
+    this.language = e.detail;
+    this.requestUpdate();
+  };
   connectedCallback() {
     super.connectedCallback();
     this._checkPathVisibility();
@@ -58,10 +72,9 @@ export class SubHeaderLayout extends LitElement {
     this.pageTitle = this._getTitleFromPath(path);
   }
   _getTitleFromPath(path) {
-    if (path === "/") return "Employee List";
-    if (path === "/cards") return "Employee Cards";
-    if (path.startsWith("/edit")) return "Edit Employee";
-    if (path === "/add") return "Add New Employee";
+    if (path === "/") return `${t("page.title.1", this.language)}`;
+    if (path.startsWith("/edit")) return `${t("page.title.3", this.language)}`;
+    if (path === "/add") return `${t("page.title.2", this.language)}`;
     return "ING CASE";
   }
 

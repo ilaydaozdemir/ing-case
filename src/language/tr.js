@@ -30,4 +30,7 @@ export default {
   "button.delete": "Sil",
   "title.employee": "Çalışanlar",
   "title.add": "Yeni Ekle",
+  "page.title.1": "Çalışan Listesi",
+  "page.title.2": "Yeni Çalışan Ekle",
+  "page.title.3": "Çalışan Kaydı Düzenle",
 };

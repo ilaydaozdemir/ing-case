@@ -30,4 +30,7 @@ export default {
   "button.delete": "Delete",
   "title.employee": "Employees",
   "title.add": "Add New",
+  "page.title.1": "Employee List",
+  "page.title.2": "Add New Employee",
+  "page.title.3": "Edit Employee",
 };
