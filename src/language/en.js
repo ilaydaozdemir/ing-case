@@ -1,4 +1,4 @@
-{
+export default {
   "page.home": "Employee List",
   "page.edit": "Edit Employee",
   "button.save": "Save",
@@ -12,5 +12,5 @@
   "form.position": "Position",
   "form.actions": "Actions",
   "title.employees": "Employees",
-  "title.add": "Employees"
-}
+  "title.add": "Add Employee",
+};

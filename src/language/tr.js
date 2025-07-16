@@ -1,4 +1,4 @@
-{
+export default {
   "page.home": "Çalışan Listesi",
   "page.edit": "Çalışanı Düzenle",
   "button.save": "Kaydet",
@@ -12,5 +12,5 @@
   "form.position": "Pozisyon",
   "form.actions": "İşlemler",
   "title.employees": "Çalışanlar",
-  "title.add": "Çalışan Ekle"
-}
+  "title.add": "Çalışan Ekle",
+};
