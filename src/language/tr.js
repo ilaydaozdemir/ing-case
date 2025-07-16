@@ -22,4 +22,8 @@ export default {
   "invalid.email": "Geçersiz e-posta adresi.",
   "select.valid.department": "Geçerli bir departman seçiniz.",
   "select.valid.position": "Geçerli bir pozisyon seçiniz.",
+  "modal.title": "Emin misin?",
+  "modal.desc1": "Seçilen Çalışan ",
+  "modal.desc2": "kayıtlarının zamanları silinecek ",
+  "modal.button": "Uygula",
 };

@@ -22,4 +22,8 @@ export default {
   "invalid.email": "Invalid email address.",
   "select.valid.department": "Please select a valid department.",
   "select.valid.position": "Please select a valid position.",
+  "modal.title": "Are you sure?",
+  "modal.desc1": "Selected Employee record of ",
+  "modal.desc2": "times will be deleted ",
+  "modal.button": "Porceed",
 };

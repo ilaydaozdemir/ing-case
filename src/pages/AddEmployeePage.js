@@ -55,7 +55,6 @@ export class AddEmployeePage extends LitElement {
 
   validate() {
     const errors = {};
-
     if (!this.formData.firstName.trim()) {
       errors.firstName = t("firstName.required", this.language);
     }

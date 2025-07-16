@@ -3,13 +3,14 @@ import {
   html,
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
-
+import { t } from "../i18n.js";
 export class DeleteModal extends LitElement {
   static properties = {
     open: { type: Boolean },
     employeeId: { type: String },
     employeeName: { type: String },
     employeeSurname: { type: String },
+    language: { type: String },
   };
   static styles = css`
     .modal-backdrop {
@@ -72,7 +73,20 @@ export class DeleteModal extends LitElement {
     this.employeeId = "";
     this.employeeName = "";
     this.employeeSurname = "";
+    this.language = localStorage.getItem("lang") || "en";
   }
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener("language-changed", this._onLanguageChanged);
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener("language-changed", this._onLanguageChanged);
+  }
+  _onLanguageChanged = (e) => {
+    this.language = e.detail;
+    this.requestUpdate();
+  };
   _confirmDelete() {
     this.dispatchEvent(
       new CustomEvent("confirm-delete", {
@@ -94,18 +108,20 @@ export class DeleteModal extends LitElement {
     return html`
       <div class="modal-backdrop">
         <div class="modal">
-          <div class="title">Are you sure?</div>
+          <div class="title">${t("modal.title", this.language)}</div>
           <p>
-            Selected Employee record of ${this.employeeName}
-            ${this.employeeSurname} times will be deleted
+            ${t("modal.desc1", this.language)} ${this.employeeName}
+            ${this.employeeSurname} ${t("modal.desc2", this.language)}
           </p>
           <div>
             <button class="confirm" @click=${this._confirmDelete}>
-              Proceed
+              ${t("modal.button", this.language)}
             </button>
           </div>
           <div>
-            <button class="cancel" @click=${this._cancelDelete}>Cancel</button>
+            <button class="cancel" @click=${this._cancelDelete}>
+              ${t("button.cancel", this.language)}
+            </button>
           </div>
         </div>
       </div>
