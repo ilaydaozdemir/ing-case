@@ -6,6 +6,9 @@ import {
 import { Router } from "https://cdn.jsdelivr.net/npm/@vaadin/router/+esm";
 
 export class Header extends LitElement {
+  static properties = {
+    language: { type: String },
+  };
   static styles = css`
     header {
       position: fixed;
@@ -36,8 +39,21 @@ export class Header extends LitElement {
       }
     }
   `;
+  constructor() {
+    super();
+    this.language = localStorage.getItem("lang") || "en";
+  }
   navigateTo(path) {
     Router.go(path);
+  }
+  toggleLanguage() {
+    const newLang = this.language === "en" ? "tr" : "en";
+    localStorage.setItem("lang", newLang);
+    this.language = newLang;
+    this.requestUpdate();
+    window.dispatchEvent(
+      new CustomEvent("language-changed", { detail: newLang })
+    );
   }
   render() {
     return html` <header>
@@ -53,13 +69,15 @@ export class Header extends LitElement {
           <iconify-icon icon="mdi:plus" width="24" height="24"></iconify-icon
           >Add New</span
         >
-        <span>
+        <span @click=${this.toggleLanguage}>
           <iconify-icon
-            icon="twemoji:flag-turkey"
+            icon=${this.language === "en"
+              ? "twemoji:flag-turkey"
+              : "twemoji:flag-united-kingdom"}
             width="24"
             height="24"
-          ></iconify-icon
-        ></span>
+          ></iconify-icon>
+        </span>
       </nav>
     </header>`;
   }
