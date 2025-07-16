@@ -4,12 +4,14 @@ import {
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
 import "./TableList/TableFooter.js";
+import { Router } from "https://cdn.jsdelivr.net/npm/@vaadin/router/+esm";
 export class Card extends LitElement {
   static properties = {
     employee: { type: Object },
   };
   static styles = css`
     .card-wrapper {
+      pointer-events: auto;
       width: 350px;
       height: auto;
       background-color: white;
@@ -19,7 +21,7 @@ export class Card extends LitElement {
     .card {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
     }
     .text {
       color: #0f0e0e5b;
@@ -63,12 +65,12 @@ export class Card extends LitElement {
   `;
   _onEdit() {
     const id = this.employee.id;
-    window.dispatchEvent(new CustomEvent("navigate-edit", { detail: id }));
+    Router.go(`/edit/${id}?view=card`);
   }
   _onDelete() {
     this.dispatchEvent(
       new CustomEvent("delete-card", {
-        detail: this.employee.email,
+        detail: this.employee.id,
         bubbles: true,
         composed: true,
       })
@@ -76,7 +78,8 @@ export class Card extends LitElement {
   }
   render() {
     const e = this.employee || {};
-    return html` <div class="card-wrapper">
+    return html`
+      <div class="card-wrapper">
         <div class="card">
           <div>
             <div class="text">First Name:</div>
@@ -120,7 +123,7 @@ export class Card extends LitElement {
           </button>
         </div>
       </div>
-      <table-footer></table-footer>`;
+    `;
   }
 }
 customElements.define("card-item", Card);

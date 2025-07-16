@@ -13,10 +13,23 @@ export class CardList extends LitElement {
   };
 
   static styles = css`
-    .card-list {
+    .wrapper {
+      height: 100vh;
       display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .card-item {
+      display: flex;
+      justify-content: center;
     }
   `;
 
@@ -37,7 +50,6 @@ export class CardList extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     if (this.unsubscribe) this.unsubscribe();
-    window.removeEventListener("navigate-edit", this._navHandler);
   }
 
   _handleDelete(e) {
@@ -47,11 +59,17 @@ export class CardList extends LitElement {
 
   render() {
     return html`
-      <div class="card-list" @delete-card=${this._handleDelete}>
-        ${this.employees.map(
-          (emp) => html`<card-item .employee=${emp}></card-item>`
-        )}
+      <div class="wrapper">
+        <div class="card-list" @delete-card=${this._handleDelete}>
+          ${this.employees.map(
+            (emp) =>
+              html`<div class="card-item">
+                <card-item .employee=${emp}></card-item>
+              </div>`
+          )}
+        </div>
       </div>
+      <table-footer></table-footer>
     `;
   }
 }

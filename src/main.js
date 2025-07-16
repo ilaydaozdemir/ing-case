@@ -8,6 +8,7 @@ const router = new Router(routing);
 router.setRoutes([
   { path: "/", component: "home-list-page" },
   { path: "/add", component: "add-page" },
+  { path: "/cards", component: "card-container" },
   { path: "/edit/:email", component: "edit-page" },
   //geçersiz URL'de ana sayfaya dön
   { path: "(.*)", redirect: "/" },
