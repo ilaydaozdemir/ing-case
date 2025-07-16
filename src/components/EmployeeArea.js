@@ -8,11 +8,13 @@ export class EmployeeArea extends LitElement {
   static properties = {
     formData: { type: Object },
     errors: { type: Object },
+    language: { type: String },
   };
   constructor() {
     super();
     this.formData = {};
     this.errors = {};
+    this.language = localStorage.getItem("lang") || "en";
   }
   static styles = css`
     .employee-area {
@@ -113,7 +115,18 @@ export class EmployeeArea extends LitElement {
       font-family: Arial, sans-serif;
     }
   `;
-
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener("language-changed", this._onLanguageChanged);
+  }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener("language-changed", this._onLanguageChanged);
+  }
+  _onLanguageChanged = (e) => {
+    this.language = e.detail;
+    this.requestUpdate();
+  };
   handleInput(key, e) {
     this.dispatchEvent(
       new CustomEvent("input-change", {
@@ -190,14 +203,16 @@ export class EmployeeArea extends LitElement {
   }
 
   render() {
+    const l = this.labels || {};
+
     return html`
       <div class="employee-area">
         <div class="employee-wrapper">
           <div class="area-1">
             <div class="sub-area">
-              ${this.renderInput("First Name", "firstName")}
-              ${this.renderInput("Date of Birth", "dob", "date")}
-              ${this.renderSelect("Department", "department", [
+              ${this.renderInput(l.firstName || "First Name", "firstName")}
+              ${this.renderInput(l.dob || "Date of Birth", "dob", "date")}
+              ${this.renderSelect(l.department || "Department", "department", [
                 "Analytics",
                 "Tech",
               ])}
@@ -205,9 +220,9 @@ export class EmployeeArea extends LitElement {
           </div>
           <div class="area-2">
             <div class="sub-area">
-              ${this.renderInput("Last Name", "lastName")}
-              ${this.renderInput("Phone", "phone", "tel")}
-              ${this.renderSelect("Position", "position", [
+              ${this.renderInput(l.lastName || "Last Name", "lastName")}
+              ${this.renderInput(l.phone || "Phone", "phone", "tel")}
+              ${this.renderSelect(l.position || "Position", "position", [
                 "Junior",
                 "Medior",
                 "Senior",
@@ -217,17 +232,21 @@ export class EmployeeArea extends LitElement {
           <div class="area-3">
             <div class="sub-area">
               ${this.renderInput(
-                "Date of Employment",
+                l.employmentDate || "Date of Employment",
                 "employmentDate",
                 "date"
               )}
-              ${this.renderInput("Email", "email", "email")}
+              ${this.renderInput(l.email || "Email", "email", "email")}
             </div>
           </div>
         </div>
         <div class="button-area">
-          <button class="save" @click=${this.handleSubmit}>Save</button>
-          <button class="cancel" @click=${this.handleCancel}>Cancel</button>
+          <button class="save" @click=${this.handleSubmit}>
+            ${l.save || "Save"}
+          </button>
+          <button class="cancel" @click=${this.handleCancel}>
+            ${l.cancel || "Cancel"}
+          </button>
         </div>
       </div>
     `;

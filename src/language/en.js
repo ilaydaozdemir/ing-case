@@ -13,4 +13,13 @@ export default {
   "form.actions": "Actions",
   "title.employees": "Employees",
   "title.add": "Add Employee",
+  "firstName.required": "First name is required.",
+  "lastName.required": "Last name is required.",
+  "dob.required": "Date of birth is required.",
+  "dob.past": "Date of birth must be in the past.",
+  "employmentDate.required": "Employment date is required.",
+  "invalid.phone": "Invalid phone number.",
+  "invalid.email": "Invalid email address.",
+  "select.valid.department": "Please select a valid department.",
+  "select.valid.position": "Please select a valid position.",
 };

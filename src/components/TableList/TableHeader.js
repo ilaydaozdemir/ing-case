@@ -89,4 +89,3 @@ export class TableHeader extends LitElement {
 }
 
 customElements.define("table-header", TableHeader);
-twemoji: flag - united - kingdom;

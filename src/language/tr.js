@@ -13,4 +13,13 @@ export default {
   "form.actions": "İşlemler",
   "title.employees": "Çalışanlar",
   "title.add": "Çalışan Ekle",
+  "firstName.required": "Ad zorunludur.",
+  "lastName.required": "Soyad zorunludur.",
+  "dob.required": "Doğum tarihi zorunludur.",
+  "dob.past": "Doğum tarihi geçmişte olmalıdır.",
+  "employmentDate.required": "İşe başlama tarihi zorunludur.",
+  "invalid.phone": "Geçersiz telefon numarası.",
+  "invalid.email": "Geçersiz e-posta adresi.",
+  "select.valid.department": "Geçerli bir departman seçiniz.",
+  "select.valid.position": "Geçerli bir pozisyon seçiniz.",
 };
