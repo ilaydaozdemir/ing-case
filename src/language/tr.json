@@ -1,0 +1,16 @@
+{
+  "page.home": "Çalışan Listesi",
+  "page.edit": "Çalışanı Düzenle",
+  "button.save": "Kaydet",
+  "button.cancel": "İptal",
+  "form.name": "Ad",
+  "form.surname": "Soyad",
+  "form.doe": "İşe Başlama Tarihi",
+  "form.birthday": "Doğum Tarihi",
+  "form.phone": "Telefon",
+  "form.department": "Departman",
+  "form.position": "Pozisyon",
+  "form.actions": "İşlemler",
+  "title.employees": "Çalışanlar",
+  "title.add": "Çalışan Ekle"
+}

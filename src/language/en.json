@@ -1,0 +1,16 @@
+{
+  "page.home": "Employee List",
+  "page.edit": "Edit Employee",
+  "button.save": "Save",
+  "button.cancel": "Cancel",
+  "form.name": "First Name",
+  "form.surname": "Last Name",
+  "form.doe": "Date of Employment",
+  "form.birthday": "Date of Birth",
+  "form.phone": "Phone",
+  "form.department": "Department",
+  "form.position": "Position",
+  "form.actions": "Actions",
+  "title.employees": "Employees",
+  "title.add": "Employees"
+}
