@@ -39,12 +39,15 @@ export class TableEmployee extends LitElement {
     this.selectedEmail = "";
   }
   _handleOpenDeleteModal(e) {
-    this.selectedEmail = e.detail.email;
+    const { id, firstName, lastName } = e.detail;
+    this.selectedId = e.detail.id;
+    this.selectedName = firstName;
+    this.selectedSurname = lastName;
     this.modalOpen = true;
   }
   _handleConfirmDelete(e) {
-    const email = e.detail.email;
-    store.dispatch(deleteEmployee(email));
+    const id = e.detail.id;
+    store.dispatch(deleteEmployee(id));
     this.modalOpen = false;
   }
   _handleCancelDelete() {
@@ -75,7 +78,9 @@ export class TableEmployee extends LitElement {
         </div>
         <delete-modal
           .open=${this.modalOpen}
-          .employeeEmail=${this.selectedEmail}
+          .employeeId=${this.selectedId}
+          .employeeName=${this.selectedName}
+          .employeeSurname=${this.selectedSurname}
           @confirm-delete=${this._handleConfirmDelete}
           @cancel-delete=${this._handleCancelDelete}
         ></delete-modal>
@@ -90,7 +95,7 @@ export class TableEmployee extends LitElement {
   _handleRowCheckboxChange(e) {
     const updatedEmp = e.detail.employee;
     this.employees = this.employees.map((emp) =>
-      emp.email === updatedEmp.email ? updatedEmp : emp
+      emp.id === updatedEmp.id ? updatedEmp : emp
     );
     this.checkedAll = this.employees.every((emp) => emp.checked);
   }

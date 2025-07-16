@@ -7,7 +7,9 @@ import {
 export class DeleteModal extends LitElement {
   static properties = {
     open: { type: Boolean },
-    employeeEmail: { type: String },
+    employeeId: { type: String },
+    employeeName: { type: String },
+    employeeSurname: { type: String },
   };
   static styles = css`
     .modal-backdrop {
@@ -67,12 +69,14 @@ export class DeleteModal extends LitElement {
   constructor() {
     super();
     this.open = false;
-    this.employeeEmail = "";
+    this.employeeId = "";
+    this.employeeName = "";
+    this.employeeSurname = "";
   }
   _confirmDelete() {
     this.dispatchEvent(
       new CustomEvent("confirm-delete", {
-        detail: { email: this.employeeEmail },
+        detail: { id: this.employeeId },
         bubbles: true,
         composed: true,
       })
@@ -92,8 +96,8 @@ export class DeleteModal extends LitElement {
         <div class="modal">
           <div class="title">Are you sure?</div>
           <p>
-            Selected Employee record of ${this.employeeEmail} times will be
-            deleted
+            Selected Employee record of ${this.employeeName}
+            ${this.employeeSurname} times will be deleted
           </p>
           <div>
             <button class="confirm" @click=${this._confirmDelete}>

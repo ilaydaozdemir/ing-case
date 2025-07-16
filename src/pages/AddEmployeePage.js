@@ -3,6 +3,7 @@ import {
   html,
   css,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js";
+import { v4 as uuidv4 } from "https://cdn.jsdelivr.net/npm/uuid@9.0.0/+esm";
 import "../components/SubHeaderLayout.js";
 import "../components/EmployeeArea.js";
 import { store, addEmployee } from "../store/store.js";
@@ -69,7 +70,12 @@ export class AddEmployeePage extends LitElement {
   }
   handleSubmit() {
     if (this.validate()) {
-      store.dispatch(addEmployee(this.formData));
+      const newEmployee = {
+        id: uuidv4(),
+        ...this.formData,
+        checked: false,
+      };
+      store.dispatch(addEmployee(newEmployee));
       window.location.href = "/";
     } else {
       console.warn("Form validation failed", this.errors);

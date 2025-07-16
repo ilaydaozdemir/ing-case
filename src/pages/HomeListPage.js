@@ -11,7 +11,7 @@ export class HomeListPage extends LitElement {
     viewType: { type: String },
   };
   static styles = css`
-    div {
+    .wrapper {
     }
   `;
   constructor() {
@@ -26,9 +26,7 @@ export class HomeListPage extends LitElement {
       <sub-header-layout @view-change=${this._handleViewChange}>
         ${this.viewType === "table"
           ? html` <div><table-employee></table-employee></div>`
-          : html` <div
-              style="display: flex; flex-wrap: wrap; gap: 1rem; padding: 1rem"
-            >
+          : html` <div class="wrapper">
               ${Array.from({ length: 1 }).map(
                 () => html`<card-container></card-container>`
               )}

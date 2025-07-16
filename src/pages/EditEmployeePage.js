@@ -11,30 +11,34 @@ export class EditEmployeePage extends LitElement {
   static properties = {
     formData: { type: Object },
     errors: { type: Object },
+    viewType: { type: String },
   };
   constructor() {
     super();
     this.formData = {};
     this.errors = {};
     this.unsubscribe = null;
+    this.viewType = "table";
   }
   connectedCallback() {
     super.connectedCallback();
     const path = window.location.pathname;
+    const parts = path.split("/");
+    const id = decodeURIComponent(parts[2]);
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(window.location.search);
+    this.viewType = url.searchParams.get("view") || "table";
     this.unsubscribe = store.subscribe(() => {
-      this.employees = [...store.getState().employees];
       this.requestUpdate();
     });
-    const parts = path.split("/");
-    const email = decodeURIComponent(parts[2]);
-    console.log("EDITING EMAIL:", email);
-    const employee = store
-      .getState()
-      .employees.find((emp) => emp.email === email);
+
+    const employee = store.getState().employees.find((emp) => emp.id === id);
     if (employee) {
       this.formData = { ...employee };
+      this.requestUpdate();
+    } else {
+      console.warn("Employee not found for ID:", id);
     }
-    console.log("EDIT PAGE FORM DATA:", this.formData);
   }
   disconnectedCallback() {
     super.disconnectedCallback();
@@ -49,11 +53,19 @@ export class EditEmployeePage extends LitElement {
 
   handleSubmit() {
     store.dispatch(updateEmployee(this.formData));
-    Router.go("/");
+    if (this.viewType === "card") {
+      Router.go("/cards");
+    } else {
+      Router.go("/");
+    }
   }
 
   handleCancel() {
-    Router.go("/edit/:email");
+    if (this.viewType === "card") {
+      Router.go("/cards");
+    } else {
+      Router.go("/");
+    }
   }
   static styles = css`
     div {

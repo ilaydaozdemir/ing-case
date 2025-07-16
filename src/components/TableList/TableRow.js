@@ -70,16 +70,18 @@ export class TableRow extends LitElement {
     }
   }
   _onDelete() {
+    const { id, firstName, lastName } = this.employee;
     this.dispatchEvent(
       new CustomEvent("request-delete", {
-        detail: { email: this.employee.email },
+        detail: { id, firstName, lastName },
         bubbles: true,
         composed: true,
       })
     );
   }
+
   _onEdit() {
-    Router.go(`/edit/${this.employee.email}`);
+    Router.go(`/edit/${this.employee.id}`);
   }
   render() {
     const emp = this.employee || {};

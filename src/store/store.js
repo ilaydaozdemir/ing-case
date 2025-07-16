@@ -17,7 +17,7 @@ const reducer = (state = initialState, action) => {
       };
     case DELETE_EMPLOYEE:
       const filteredEmployees = state.employees.filter(
-        (emp) => emp.email !== action.payload
+        (emp) => emp.id !== action.payload
       );
       localStorage.setItem("employees", JSON.stringify(filteredEmployees));
       return {
@@ -26,7 +26,7 @@ const reducer = (state = initialState, action) => {
       };
     case "UPDATE_EMPLOYEE":
       const updatedList = state.employees.map((emp) =>
-        emp.email === action.payload.email ? action.payload : emp
+        emp.id === action.payload.id ? action.payload : emp
       );
       localStorage.setItem("employees", JSON.stringify(updatedList));
       return {
@@ -43,9 +43,9 @@ export const addEmployee = (employee) => ({
   type: ADD_EMPLOYEE,
   payload: employee,
 });
-export const deleteEmployee = (email) => ({
+export const deleteEmployee = (id) => ({
   type: DELETE_EMPLOYEE,
-  payload: email,
+  payload: id,
 });
 export const updateEmployee = (employee) => ({
   type: "UPDATE_EMPLOYEE",
