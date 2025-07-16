@@ -11,14 +11,14 @@ export class Header extends LitElement {
       position: fixed;
       top: 0;
       left: 0;
+      height: 60px;
       width: 99%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       background-color: white;
-      margin-top: 1rem;
       color: #ff6101;
-      height: 24px;
+      z-index: 10000;
       nav {
         display: flex;
         justify-content: space-between;
