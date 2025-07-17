@@ -25,6 +25,12 @@ export class TableEmployee extends LitElement {
       min-width: 1400px;
       width: max-content;
     }
+    .table-body {
+      min-height: 400px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   `;
   constructor() {
     super();
@@ -67,9 +73,11 @@ export class TableEmployee extends LitElement {
           @request-delete=${this._handleOpenDeleteModal}
         >
           <table-header .checkedAll=${this.checkedAll}></table-header>
-          ${paginatedEmployees.map(
-            (emp) => html`<table-row .employee=${{ ...emp }}></table-row>`
-          )}
+          <div class="table-body">
+            ${paginatedEmployees.map(
+              (emp) => html` <table-row .employee=${{ ...emp }}></table-row> `
+            )}
+          </div>
           <table-footer
             .currentPage=${this.currentPage}
             .totalPages=${Math.ceil(this.employees.length / 10)}
