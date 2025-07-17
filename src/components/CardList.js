@@ -14,7 +14,6 @@ export class CardList extends LitElement {
 
   static styles = css`
     .wrapper {
-      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
